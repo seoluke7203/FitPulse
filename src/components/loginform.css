@@ -1,0 +1,135 @@
+.container-fluid {
+    overflow: hidden;
+    background-color: rgb(248, 237, 223);
+}
+
+.bg-image-vertical {
+    position: relative;
+    overflow: hidden;
+    background-repeat: no-repeat;
+    background-position: right center;
+    background-size: auto 100%;
+}
+
+@media (min-width: 1025px) {
+    .h-custom-2 {
+        height: 100%;
+        margin-right: 300px;
+    }
+}
+
+.h1.fw-bold.mb-0 {
+    text-align: center;
+    font-size: 60px;
+}
+
+.PULSE {
+    /* Standard Syntax */
+    animation: PULSE 7s infinite ease-in-out;
+}
+
+.PULSE span {
+    color: rgba(0, 250, 255, 299);
+}
+
+#container {
+    width: 500px;
+    margin: 0 auto;
+    margin-top: 40px;
+}
+
+.loader {
+    height: 5px;
+    background: rgba(40, 175, 201);
+    position: relative;
+    animation: PULSE2 7s infinite;
+}
+
+.loader span {
+    position: absolute;
+    display: block;
+    height: 5px;
+    width: 10px;
+    border-radius: 100%;
+    box-shadow: #0e98d4 0 0 5px 2px;
+    animation: LOADER 4s infinite ease-in-out;
+    opacity: 0;
+    border: none;
+}
+
+.loader span:nth-child(1) {
+    animation-delay: 0s;
+}
+
+.loader span:nth-child(2) {
+    animation-delay: 2s;
+}
+
+@keyframes LOADER {
+    0% {
+        left: 0;
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 0;
+        left: 0;
+    }
+
+    20% {
+        opacity: 1;
+    }
+
+    80% {
+        opacity: 1;
+    }
+
+    90% {
+        opacity: 0;
+        left: calc(100% - 10px);
+    }
+
+    100% {
+        opacity: 0;
+        left: calc(100% - 10px);
+    }
+}
+
+
+
+/* Standard Syntax */
+@keyframes PULSE {
+    0% {
+        color: rgba(0, 255, 255);
+    }
+
+    20% {
+        color: rgba(40, 175, 201);
+    }
+
+    60% {
+        color: rgb(35, 135, 156);
+    }
+
+    110% {
+        color: black;
+    }
+}
+
+@keyframes PULSE2 {
+    0% {
+        background-color: rgba(0, 255, 255);
+    }
+
+    20% {
+        background-color: rgba(40, 175, 201);
+    }
+
+    60% {
+        background-color: rgb(35, 135, 156);
+    }
+
+    100% {
+        background-color: black;
+    }
+}
