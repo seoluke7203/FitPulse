@@ -67,9 +67,9 @@ function LoginForm() {
                                     <button className="btn btn-info btn-lg btn-block w-100 " type="submit" formAction=''>Login</button>
                                 </div>
 
-
+                                <Link to = '/main'>
                                 <button className="btn btn-info btn-lg btn-block w-100 mb-4" type="button" formAction=''>Continue as Guest</button>
-
+                                </Link>
 
 
 

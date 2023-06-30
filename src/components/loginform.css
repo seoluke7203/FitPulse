@@ -3,6 +3,10 @@
     background-color: rgb(248, 237, 223);
 }
 
+.p-0-bg-black-text-white{
+    background-color: #0e98d4;
+}
+
 .bg-image-vertical {
     position: relative;
     overflow: hidden;

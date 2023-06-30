@@ -36,7 +36,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 
-
+console.log(path.join(__dirname,'/build'));
 
 mongoose.connect("mongodb+srv://seoluke7203:POrNuRXJyevw44fO@cluster0.ztu7jxn.mongodb.net/FitPulse",
     {
@@ -92,6 +92,15 @@ app.get('/main', function (req, res) {
     res.sendFile(path.join(__dirname + "/build/index.html"));
 });
 
+
+app.get('/logout', function(req, res){
+    req.logOut(function(err){
+        if (err){
+            console.log(err);
+        }
+    });
+    res.redirect('/');
+})
 
 
 app.get('*', function (req, res) {
