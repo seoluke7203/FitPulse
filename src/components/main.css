@@ -1,7 +1,14 @@
+.wrapper {
+  background-color: aqua;
+}
+
 .content-wrapper {
-    flex: 1;
+    flex: 2;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    flex-wrap: wrap;
+    order:5;
     min-height: 78vh;
     background-color: white;
   }
+

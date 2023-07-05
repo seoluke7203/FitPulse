@@ -1,0 +1,35 @@
+
+
+.create-note {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .input-group {
+    display: flex;
+    align-items: center;
+    width: 100%;
+  }
+  
+  .textarea {
+    flex-grow: 1;
+    resize: none;
+  }
+  
+  .input-group-append {
+    display: flex;
+    align-items: center;
+    margin-left: 10px;
+  }
+
+  .create-note .btnSubmit {
+    background-color: skyblue;
+    font-size: 18px;
+    box-shadow: 0 5px 3px rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+  }
+
+  .create-note .Title {
+    font-size: 20px;
+    margin-left: 50px;
+  }
