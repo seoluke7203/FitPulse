@@ -51,7 +51,7 @@ function Main() {
                             sets={noteItem.sets}
                             reps={noteItem.reps}
                             weight={noteItem.weight}
-                            date={noteItem.date}
+                            date={noteItem.date || ""}
                             onDelete={deleteNote}
                         />
                     );

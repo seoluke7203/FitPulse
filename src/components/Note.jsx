@@ -9,10 +9,10 @@ function Note(props) {
 
   return (
     <div className="note">
-      <h1>{props.title}</h1>
-      <p>{props.sets}</p>
-      <p>{props.reps}</p>
-      <p>{props.weight}</p>
+      <h1>{props.title || "Exercise"}</h1>
+      <p>{props.sets || 0} sets</p>
+      <p>{props.reps || 0} reps</p>
+      <p>{props.weight || 0} lb/kg</p>
       <p>{props.date}</p>
       <button onClick={handleClick}><DeleteIcon/></button>
     </div>

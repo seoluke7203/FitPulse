@@ -19,7 +19,6 @@
   .input-group-append {
     display: flex;
     align-items: center;
-    margin-left: 10px;
   }
 
   .create-note .btnSubmit {

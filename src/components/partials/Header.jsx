@@ -3,7 +3,10 @@ import React, { useState } from "react";
 import BMImodal from "./BMImodal";
 
 function Header() {
-
+    const query = new URLSearchParams(window.location.search);
+    const fName = query.get('fName') || "Guest";
+    const lName = query.get('lName') || "";
+    const email = query.get('email');
 
     const [modalShow, setModalShow] = useState(false);
 
@@ -20,8 +23,9 @@ function Header() {
                             </div>
                         </div>
                     </ul>
-
-
+                    <div class="welcome" style={{marginRight:"30px", marginTop:"4px"}}>
+                        <h3>Welcome, {fName}!</h3>
+                    </div>
                     <div class="text-end">
                         <button type="button" class="btn btn-primary" onClick={() => setModalShow(true)}>Calculate your BMI</button>
                     </div>
