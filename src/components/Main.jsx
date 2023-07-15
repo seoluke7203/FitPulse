@@ -4,19 +4,33 @@ import Header from "./partials/Header";
 import "./main.css";
 import CreateArea from './CreateArea';
 import Note from './Note';
+import axios from "axios"; 
 
-function Main() {
-
-    // const [fName, setfName] = useState("");
-
+function Main(props) {
 
     const query = new URLSearchParams(window.location.search);
     const fName = query.get('fName') || "Guest";
     const lName = query.get('lName') || "";
     const email = query.get('email');
+    const userE = query.get('email');
+    const [notes, setNotes] = useState(props.foundNote || []);
     console.log(fName, lName);
 
-    const [notes, setNotes] = useState([]);
+
+    useEffect(() =>{
+        fetch('/savedNote')
+        .then(response => response.json())
+        .then(data => {
+            const emailList = data.map(item => item.email);
+            console.log("Email:", emailList);
+            console.log("User Email:", userE);
+            const filteredNotes = data.filter(item => item.email === userE);
+            setNotes(filteredNotes);
+        })
+        .catch(error =>{
+            console.error('Error: ', error );
+        });
+    }, []);
 
     function addNote(newNote) {
         setNotes(prevNotes => {
@@ -33,19 +47,17 @@ function Main() {
     }
 
     return (
-
         <div id="tmp">
-            {/* Welcome, {fName} {lName}!! */}
             <Header />
             <div id="wrapper">
-
             <div className="content-wrapper">
-                <CreateArea onAdd={addNote} />
+                <CreateArea onAdd={addNote} email={email}/>
                 {notes.map((noteItem, index) => {
                     return (
                         <Note
                             key={index}
                             id={index}
+                            email={email}
                             title={noteItem.title}
                             content={noteItem.content}
                             sets={noteItem.sets}
@@ -56,20 +68,6 @@ function Main() {
                         />
                     );
                 })}
-
-
-                    {/* <h2>Welcome, {fName}!</h2> */}
-                    {/* <form method="POST">
-                    <input type="hidden" name="id" value={email}></input>
-
-                    <div class="d-flex justify-content-center align-items-center card-body">
-                        <button type="submit" id="btn-register"
-                            class="btn btn-success btn-block btn-lg gradient-custom-4 text-body w-30">Save</button>
-                    </div>
-                </form> */}
-
-
-
                 </div>
                 <Footer />
             </div>

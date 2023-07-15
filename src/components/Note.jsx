@@ -7,6 +7,8 @@ function Note(props) {
     props.onDelete(props.id);
   }
 
+  console.log('Note - Email:', props.email);
+
   return (
     <div className="note">
       <h1>{props.title || "Exercise"}</h1>
@@ -14,6 +16,7 @@ function Note(props) {
       <p>{props.reps || 0} reps</p>
       <p>{props.weight || 0} lb/kg</p>
       <p>{props.date}</p>
+      <p>{props.email}</p>
       <button onClick={handleClick}><DeleteIcon/></button>
     </div>
   );

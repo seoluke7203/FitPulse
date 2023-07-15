@@ -18,9 +18,12 @@ function CreateArea(props) {
 
     const email = props.email;
 
+
+    console.log('CA - Email:', props.email);
+
     const [note, setNote] = useState({
         title: "",
-        content: "",
+        id: "",
         sets: "",
         reps: "",
         weight: "",
@@ -57,11 +60,11 @@ function CreateArea(props) {
     }
 
     function submitNote(event) {
-        event.preventDefault();
-
+        props.onAdd(note);
 
         const newNote = {
             title: note.title,
+            id: note.id,
             sets: note.sets,
             reps: note.reps,
             weight: note.weight,
@@ -69,46 +72,35 @@ function CreateArea(props) {
             email: email
         };
 
-        console.log("New:", newNote);
-
-    
-        fetch("/saveNote", {
-            method: "POST",
+        fetch('/api/notes', {
+            method: 'POST',
             headers: {
-                "Content-Type": "application/json"
+                'Content-Type': 'application/json',
             },
-            body: JSON.stringify(newNote)
+            body: JSON.stringify(newNote),
         })
-        .then(response => {
-            if (response.ok) {
-                console.log("Note saved successfully", note);
-                // Do something after saving the note, like displaying a success message
-                props.onAdd(newNote); // Add the note to the 'notes' state in the 'Main' component
-            } else {
-                console.log("Error saving note:", response.status);
-                // Handle the error, like displaying an error message
-            }
-        })
-        .catch(error => {
-            console.log("Error saving note:", error);
-            // Handle the error, like displaying an error message
-        });
-    
-        // Clear the form fields or perform any other necessary actions
-        setNote({
-            title: "",
-            content: "",
-            sets: "",
-            reps: "",
-            weight: "",
-            email: email,
-            date: defaultDate
-        });
+            .then(response => response.json())
+            .then(data => {
+                console.log('Note Saved', data);
+                setNote({
+                    title: "",
+                    sets: "",
+                    reps: "",
+                    weight: "",
+                    date: defaultDate,
+                    email: email
+                });
+            })
+            .catch(error =>{
+                console.error('Error Saving note: ', error)
+            });
+
+        event.preventDefault();
     }
 
     return (
         <div>
-            <form className='create-note' method="POST">
+            <form className='create-note' method="POST" onSubmit={submitNote}>
                 <input
                     className='Title'
                     name="title"
@@ -168,7 +160,7 @@ function CreateArea(props) {
                 </div>
 
                 <Zoom in={isExpanded}>
-                    <button className="btnSubmit" style={{ width: "400px", textAlign: "center", margin: "10px" }} onClick={submitNote}>Submit</button>
+                    <button className="btnSubmit" button type="submit" style={{ width: "400px", textAlign: "center", margin: "10px" }}>Submit</button>
                 </Zoom>
             </form>
         </div>

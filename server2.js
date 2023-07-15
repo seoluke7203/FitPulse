@@ -15,7 +15,6 @@ const findOrCreate = require("mongoose-findorcreate");
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
 const url = require('url');
-const fs = require('fs');
 
 
 
@@ -26,8 +25,6 @@ app.use(express.json());
 app.use(bodyParser.urlencoded({
     extended: true
 }));
-
-app.use(bodyParser.json());
 
 app.use(session({
     secret: "Secret",
@@ -59,7 +56,10 @@ const userSchema = new mongoose.Schema({
     fName: String,
     lName: String,
 
+
 }, { strict: false })
+
+
 
 const noteSchema = new mongoose.Schema({
     title: String,
@@ -67,9 +67,14 @@ const noteSchema = new mongoose.Schema({
     sets: Number,
     reps: Number,
     weight: Number,
-    email: String,
     date: String,
+    email:String
+
 });
+
+
+
+
 
 
 
@@ -78,7 +83,8 @@ userSchema.plugin(findOrCreate);
 
 
 const User = new mongoose.model("User", userSchema);
-const Note = new mongoose.model("Note", noteSchema);
+const Note = new mongoose.model('Note', noteSchema);
+
 passport.use(User.createStrategy());
 
 
@@ -96,43 +102,18 @@ passport.deserializeUser(function (user, cb) {
     });
 });
 
-
-
-
 app.get('/main', function (req, res) {
     console.log("connecting to main");
+    // if (req.isAuthenticated()) {
+    //     console.log("Authenticated");
+    //     res.sendFile(path.join(__dirname + "/build/index.html"));
+    // } else {
+    //     console.log("Not authenticated");
+    //     res.redirect('/');
+    // }
+    // res.redirect('/main');
     res.sendFile(path.join(__dirname + "/build/index.html"));
-
 });
-
-// app.get('/main', function (req, res) {
-//     console.log("connecting to main");
-//     Note.find({})
-//         .then(foundNote => {
-//             console.log("Foundnote", foundNote);
-//             res.render('main', { notes: foundNote });
-//         })
-//         .catch(error => {
-//             console.log("Error retrieving notes:", error);
-//             res.status(500).json({ error: "Failed to retrieve notes" });
-//         });
-// });
-
-
-
-app.get("/savedNote", (req, res) => {
-
-
-    Note.find({})
-      .then(foundNotes => {
-        console.log("Found notes:", foundNotes);
-        res.json(foundNotes);
-      })
-      .catch(error => {
-        console.log("Error retrieving notes:", error);
-        res.status(500).json({ error: "Failed to retrieve notes" });
-      });
-  });
 
 
 app.get('/logout', function (req, res) {
@@ -150,35 +131,53 @@ app.get('*', function (req, res) {
 });
 
 
+app.get('/api/notes', function (req, res) {
+    const userEmail = req.query.email;
+  
+    Note.find({ email: userEmail })
+      .then((notes) => {
+        console.log('Notes fetched successfully', notes);
+        res.json(notes);
+      })
+      .catch((error) => {
+        console.log('Failed to fetch notes', error);
+        res.status(500).json({ error: 'Failed to fetch notes' });
+      });
+  });
+  
 
-app.post("/saveNote", function (req, res) {
-    const { title, content, sets, reps, weight, email, date } = req.body;
+app.post('/api/notes', function (req, res) {
+    const { title, id, content, sets, reps, weight, date, email } = req.body;
 
-    console.log(req.body.sets);
+    console.log("Hello", req.body.sets);
 
-    // Save the note to the database using your Mongoose model
+    // Create a new Note object with the provided data
     const newNote = new Note({
-        title: title,
-        content: content,
-        sets: sets,
-        reps: reps,
-        weight: weight,
-        email: email,
-        date: date
+        title,
+        id,
+        content,
+        sets,
+        reps,
+        weight,
+        date,
+        email
     });
 
-    console.log("New note:", newNote);
-
+    console.log('New note:', newNote);
+    // Save the new note to the database
     newNote.save()
-        .then((savedNote) => {
-            console.log("Note saved to the database", savedNote);
-            res.sendStatus(200);
+        .then(savedNote => {
+            console.log('Note saved:', savedNote);
+            res.json(savedNote); // Send a JSON response if needed
         })
         .catch(error => {
-            console.log("Error saving note to the database:", error);
-            res.sendStatus(500);
+            console.error('Error saving note:', error);
+            res.status(500).json({ error: 'Failed to save note' }); // Send an error response if needed
         });
 });
+
+
+
 
 app.post('/register', function (req, res) {
     bcrypt.hash(req.body.password, saltRounds, function (err, hash) {
@@ -256,3 +255,4 @@ app.post("/main", function (req, res) {
 app.listen(3000, function () {
     console.log("Server is running on port 3000");
 })
+
