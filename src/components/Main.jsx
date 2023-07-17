@@ -38,13 +38,34 @@ function Main(props) {
         });
     }
 
-    function deleteNote(id) {
+    function deleteNote(id, db_id) {
+        console.log("main: ", id, db_id);
         setNotes(prevNotes => {
             return prevNotes.filter((noteItem, index) => {
                 return index !== id;
             });
         });
+        fetch(`/saveNote/${db_id}`, { method: 'DELETE' })
+        .then(response => {
+          if (response.ok) {
+            console.log('Note deleted successfully');
+            // Update your notes state or perform any necessary actions
+          } else {
+            console.error('Failed to delete note');
+          }
+        })
+        .catch(error => {
+          console.error('Error:', error);
+        });
     }
+
+    function handleDelete(noteId){
+        console.log("Handle", noteId);
+        
+    }
+
+
+
 
     return (
         <div id="tmp">
@@ -64,7 +85,7 @@ function Main(props) {
                             reps={noteItem.reps}
                             weight={noteItem.weight}
                             date={noteItem.date || ""}
-                            onDelete={deleteNote}
+                            onDelete={() => deleteNote(index, noteItem._id)}
                         />
                     );
                 })}

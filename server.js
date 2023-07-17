@@ -1,21 +1,16 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const { createRoot } = require("react-dom/client");
 const path = require('path');
 const app = express();
-const React = require('react');
 const session = require('express-session');
 const passport = require('passport');
 const mongoose = require("mongoose");
 const passportLocalMongoose = require('passport-local-mongoose');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const findOrCreate = require("mongoose-findorcreate");
-// const connectDB = require("./config/db");
-// const userSchema = require("./src/models/userSchema");
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
 const url = require('url');
-const fs = require('fs');
 
 
 
@@ -105,23 +100,8 @@ app.get('/main', function (req, res) {
 
 });
 
-// app.get('/main', function (req, res) {
-//     console.log("connecting to main");
-//     Note.find({})
-//         .then(foundNote => {
-//             console.log("Foundnote", foundNote);
-//             res.render('main', { notes: foundNote });
-//         })
-//         .catch(error => {
-//             console.log("Error retrieving notes:", error);
-//             res.status(500).json({ error: "Failed to retrieve notes" });
-//         });
-// });
-
-
 
 app.get("/savedNote", (req, res) => {
-
 
     Note.find({})
       .then(foundNotes => {
@@ -252,6 +232,23 @@ app.post("/main", function (req, res) {
             // Handle the error appropriately
         });
 });
+
+
+app.delete('/saveNote/:id', (req,res) =>{
+    const noteID = req.params.id;
+
+    Note.findByIdAndRemove(noteID)
+    .then(() => {
+        res.sendStatus(200);
+    })
+    .catch(error => {
+        console.error("Error: ", error);
+        console.log("Hello", noteID);
+        res.status(500).json({error: "Failed to Delete Note"});
+    })
+})
+
+
 
 app.listen(3000, function () {
     console.log("Server is running on port 3000");
