@@ -35,11 +35,31 @@ To make the most of this application, follow these simple steps:
 
 1. **Register your account:** Start by creating your own account by clicking on "Register here."
 ![Screenshot](assets/register.jpg)
+
+
+
+
 2. **Log in:** Once you have registered, log in using your account credentials.
 ![Screenshot](assets/login.jpg)
+
+
+
+
 3. **Add your workout information:** Click on the input box to add information about your workouts. Record your exercises, sets, reps, and any other relevant details.
 ![Screenshot](assets/main.jpg)
+
+
+
+
 4. **Track your progress:** Keep track of your daily workouts and witness your progress over time. You'll be able to see how much you have improved!
 ![Screenshot](assets/main_data.jpg)
-Feel free to explore and make the most of the features this web application has to offer. Enjoy your fitness journey!
+
+
+
+
+
+
+
+
+**Feel free to explore and make the most of the features this web application has to offer. Enjoy your fitness journey!**
 
