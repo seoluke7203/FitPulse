@@ -234,7 +234,6 @@ app.post("/submit-login", function (req, res) {
             }
         });
 });
-    });
 
 app.post("/main", function (req, res) {
     const userId = req.body.id;
