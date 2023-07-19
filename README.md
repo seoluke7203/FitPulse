@@ -1,5 +1,5 @@
 # Welcome to FitPulse
-
+![Screenshot](assets/main.jpg)
 
 ## How to Run
 
