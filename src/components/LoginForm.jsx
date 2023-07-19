@@ -16,13 +16,13 @@ function LoginForm() {
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const handleSubmit = (e) =>{
+    const handleSubmit = (e) => {
         // e.preventDefault();
         console.log("Loging in...");
-        
+
         // navigate('/');
-      }
-    
+    }
+
 
 
 
@@ -44,21 +44,25 @@ function LoginForm() {
                         </div>
                         <div className="d-flex align-items-center h-custom-2 px-5 ms-xl-4 pt-5 pt-xl-0 mt-xl-n5" style={{ marginTop: "-50px" }}>
 
+                            <form name="login" netlify netlify-honeypot="bot-field" hidden>
+                                <input type="email" name="useremail" />
+                                <input type="password" name="password" />
+                                <textarea name="message"></textarea>
+                            </form>
 
-
-                            <form name="login" style={{ width: "23rem" }} onSubmit={handleSubmit} method="POST" netlify  netlify-honeypot="bot-field" >
-                            <input type="hidden" name="form-name" value="login" />
+                            <form style={{ width: "23rem" }} onSubmit={handleSubmit} method="POST" >
+                                <input type="hidden" name="form-name" value="login" />
                                 <h3 className="fw-normal mb-3 pb-3" style={{ letterSpacing: "1px" }}>Log in</h3>
 
                                 <div className="form-outline mb-2">
                                     <label className="form-label" htmlFor="form2Example18">Email address</label>
-                                    <input name="useremail" type="email"  id="email" value={email} className="form-control form-control-lg" style={{ width: "350px" }} onChange={(e) => setEmail(e.target.value)} />
+                                    <input name="useremail" type="email" id="email" value={email} className="form-control form-control-lg" style={{ width: "350px" }} onChange={(e) => setEmail(e.target.value)} />
 
                                 </div>
 
                                 <div className="form-outline mb-4">
                                     <label className="form-label" htmlFor="form2Example28">Password</label>
-                                    <input name="password" type="password"  id="password" value={password} className="form-control form-control-lg" onChange={(e) => setPassword(e.target.value)} />
+                                    <input name="password" type="password" id="password" value={password} className="form-control form-control-lg" onChange={(e) => setPassword(e.target.value)} />
 
                                 </div>
 
@@ -68,8 +72,8 @@ function LoginForm() {
                                     <button className="btn btn-info btn-lg btn-block w-100 " type="submit" formAction=''>Login</button>
                                 </div>
 
-                                <Link to = '/main'>
-                                <button className="btn btn-info btn-lg btn-block w-100 mb-4" type="button" formAction=''>Continue as Guest</button>
+                                <Link to='/main'>
+                                    <button className="btn btn-info btn-lg btn-block w-100 mb-4" type="button" formAction=''>Continue as Guest</button>
                                 </Link>
 
 
