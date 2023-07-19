@@ -8,7 +8,7 @@
 </head>
 
 <body>
-  <form name="login" netlify netlify-honeypot="bot-field" action="/" method="POST" hidden>
+  <form name="login" netlify netlify-honeypot="bot-field" action="/submit-login" method="POST" hidden>
     <input type="email" name="useremail" />
     <input type="password" name="password" />
 
@@ -16,32 +16,6 @@
   <div id="root"></div>
 
   <script src="../src/index.js" type="text/jsx"></script>
-  <script>
-    const form = document.forms.login;
-
-    form.addEventListener("submit", async (event) => {
-      event.preventDefault();
-      const formData = new FormData(form);
-
-      try {
-        const response = await fetch("/", {
-          method: "POST",
-          body: formData,
-        });
-
-        if (response.ok) {
-          // Form submitted successfully, do any necessary actions here
-          console.log("Form submitted successfully.");
-        } else {
-          console.error("Failed to submit the form.");
-        }
-      } catch (error) {
-        console.error("Error occurred during form submission:", error);
-      }
-
-      // Continue with the default form submission
-      form.submit();
-    });
   </script>
 </body>
 
