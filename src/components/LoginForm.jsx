@@ -51,13 +51,13 @@ function LoginForm() {
 
                                 <div className="form-outline mb-2">
                                     <label className="form-label" htmlFor="form2Example18">Email address</label>
-                                    <input type="email" name="useremail" id="email" value={email} className="form-control form-control-lg" style={{ width: "350px" }} onChange={(e) => setEmail(e.target.value)} />
+                                    <input name="useremail" type="email"  id="email" value={email} className="form-control form-control-lg" style={{ width: "350px" }} onChange={(e) => setEmail(e.target.value)} />
 
                                 </div>
 
                                 <div className="form-outline mb-4">
                                     <label className="form-label" htmlFor="form2Example28">Password</label>
-                                    <input type="password" name="password" id="password" value={password} className="form-control form-control-lg" onChange={(e) => setPassword(e.target.value)} />
+                                    <input name="password" type="password"  id="password" value={password} className="form-control form-control-lg" onChange={(e) => setPassword(e.target.value)} />
 
                                 </div>
 
