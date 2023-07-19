@@ -28,3 +28,18 @@ Follow these steps to get your application up and running:
     - nodemon server.js
   
 2. Access the application in your web browser at: `http://localhost:3000`
+
+## How to Use
+
+To make the most of this application, follow these simple steps:
+
+1. **Register your account:** Start by creating your own account by clicking on "Register here."
+
+2. **Log in:** Once you have registered, log in using your account credentials.
+
+3. **Add your workout information:** Click on the input box to add information about your workouts. Record your exercises, sets, reps, and any other relevant details.
+
+4. **Track your progress:** Keep track of your daily workouts and witness your progress over time. You'll be able to see how much you have improved!
+
+Feel free to explore and make the most of the features this web application has to offer. Enjoy your fitness journey!
+
