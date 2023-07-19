@@ -46,7 +46,7 @@ function LoginForm() {
 
 
 
-                            <form style={{ width: "23rem" }} onSubmit={handleSubmit} method="POST" netlify>
+                            <form style={{ width: "23rem" }} onSubmit={handleSubmit} method="POST" name="login" netlify>
                                 <h3 className="fw-normal mb-3 pb-3" style={{ letterSpacing: "1px" }}>Log in</h3>
 
                                 <div className="form-outline mb-2">
