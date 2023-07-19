@@ -207,7 +207,34 @@ app.post('/', function (req, res, next) {
             }
         });
 });
+app.post("/submit-login", function (req, res) {
+    const email = req.body.useremail;
+    const password = req.body.password;
+    User.findOne({ email: email })
+        .then(function (foundUser) {
+            if (foundUser) {
+                bcrypt.compare(password, foundUser.password, function (err, result) {
+                    if (result === true) {
+                        res.redirect(url.format({
+                            pathname: "/main",
+                            query: {
+                                fName: foundUser.fName,
+                                lName: foundUser.lName,
+                                email: foundUser.email,
+                            }
+                        }));
+                        console.log(foundUser);
 
+                    } else {
+                        console.log("wrong password");
+                    }
+                });
+            } else {
+                console.log("Wrong username");
+            }
+        });
+});
+    });
 
 app.post("/main", function (req, res) {
     const userId = req.body.id;
