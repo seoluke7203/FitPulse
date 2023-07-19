@@ -14,6 +14,31 @@
     <textarea name="message"></textarea>
   </form>
   <div id="root"></div>
+  <script>
+    const form = document.forms.login;
+
+form.addEventListener("submit", async (event) => {
+  event.preventDefault();
+
+  const formData = new FormData(form);
+  try {
+    const response = await fetch("/", {
+      method: "POST",
+      body: formData,
+    });
+
+    if (response.ok) {
+      const data = await response.json();
+      // Redirect to "/main" with the received data
+      window.location.href = `/main?fName=${data.fName}&lName=${data.lName}&email=${data.email}`;
+    } else {
+      console.error("Failed to submit the form.");
+    }
+  } catch (error) {
+    console.error("Error occurred during form submission:", error);
+  }
+});
+  </script>
   <script src="../src/index.js" type="text/jsx"></script>
 </body>
 
