@@ -44,11 +44,7 @@ function LoginForm() {
                         </div>
                         <div className="d-flex align-items-center h-custom-2 px-5 ms-xl-4 pt-5 pt-xl-0 mt-xl-n5" style={{ marginTop: "-50px" }}>
 
-                            <form name="login" netlify netlify-honeypot="bot-field" hidden> 
-                                <input type="email" name="useremail" />
-                                <input type="password" name="password" />
-                                <textarea name="message"></textarea>
-                            </form>
+
 
                             <form style={{ width: "23rem" }} onSubmit={handleSubmit} method="POST" >
                                 <input type="hidden" name="form-name" value="login" />
