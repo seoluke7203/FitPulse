@@ -46,7 +46,7 @@ function LoginForm() {
 
 
 
-                            <form name="login" style={{ width: "23rem" }} onSubmit={handleSubmit} method="POST"data-netlify="true">
+                            <form name="login" style={{ width: "23rem" }} onSubmit={handleSubmit} method="POST" netlify  netlify-honeypot="bot-field" >
                             <input type="hidden" name="form-name" value="login" />
                                 <h3 className="fw-normal mb-3 pb-3" style={{ letterSpacing: "1px" }}>Log in</h3>
 
