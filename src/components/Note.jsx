@@ -3,21 +3,7 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import "./note.css";
 
 function Note(props) {
-  // const handleDeleteNote = (noteId) =>{
-  //   console.log("Handle", noteId);
-  //   fetch(`/deleteNote/${noteId}`, { method: 'DELETE' })
-  //   .then(response => {
-  //     if (response.ok) {
-  //       console.log('Note deleted successfully');
-  //       // Update your notes state or perform any necessary actions
-  //     } else {
-  //       console.error('Failed to delete note');
-  //     }
-  //   })
-  //   .catch(error => {
-  //     console.error('Error:', error);
-  //   });
-  // }
+
 
 
   function handleClick() {

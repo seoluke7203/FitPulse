@@ -5,6 +5,7 @@ import "./main.css";
 import CreateArea from './CreateArea';
 import Note from './Note';
 import axios from "axios"; 
+import Swal from 'sweetalert2';
 
 function Main(props) {
 
@@ -31,6 +32,8 @@ function Main(props) {
             console.error('Error: ', error );
         });
     }, []);
+
+
 
     function addNote(newNote) {
         setNotes(prevNotes => {

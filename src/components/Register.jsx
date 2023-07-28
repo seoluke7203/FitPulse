@@ -4,6 +4,8 @@ import './bootstrap-social.css';
 import './register.css';
 import { GoogleLoginButton } from "react-social-login-buttons";
 import { useNavigate } from 'react-router-dom';
+import { useHistroy} from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 // import MyVerticallyCenteredModal from "./Signup";
 import { Link, redirect } from "react-router-dom";
@@ -21,14 +23,21 @@ function Register() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
-  const handleSubmit = (e) =>{
-    // e.preventDefault();
+  const history = useHistroy();
 
-    console.log("Form submitted");
-    console.log("User Email: ", email);
-    console.log("Password:", password);
-    
-    // navigate('/');
+  const handleSubmit = (e) => {
+    Swal.fire({
+      icon: 'success',
+      title: 'Registered!',
+      text: 'You have been registered successfully!',
+      confirmButtonText: 'OK'
+    }).then((result) => {
+      // Redirect to the homepage after showing the alert
+      if (result.isConfirmed) {
+        navigate('/');
+
+      }
+    });
   }
 
 
@@ -56,12 +65,12 @@ function Register() {
                     </div>
 
                     <div class="form-floating">
-                      <input type="email" class="form-control middle" name="useremail" placeholder="name@example.com" onChange={(e)=>setEmail(e.target.value)}/>
+                      <input type="email" class="form-control middle" name="useremail" placeholder="name@example.com" onChange={(e) => setEmail(e.target.value)} />
                       <label for="floatingInput">Email Address</label>
                     </div>
 
                     <div class="form-floating">
-                      <input type="password" class="form-control bottom " name="password" placeholder="password" onChange={(e)=>setPassword(e.target.value)} />
+                      <input type="password" class="form-control bottom " name="password" placeholder="password" onChange={(e) => setPassword(e.target.value)} />
                       <label for="floatingInput">Password</label>
                     </div>
 
@@ -77,7 +86,14 @@ function Register() {
 
 
                     <div class="d-flex justify-content-center align-items-center card-body">
-                      <GoogleLoginButton onClick={() => alert("Hello")}>
+                      <GoogleLoginButton onClick={() =>
+                        Swal.fire({
+                          icon: 'failure',
+                          title: 'Failed',
+                          text: 'Sorry, Google Login is under maintenance',
+                          confirmButtonText: 'OK'
+                        })
+                      }>
                         <span>Sign Up with Google</span>
                       </GoogleLoginButton>
                     </div>

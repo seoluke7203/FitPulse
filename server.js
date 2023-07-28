@@ -200,10 +200,12 @@ app.post('/', function (req, res, next) {
 
                     } else {
                         console.log("wrong password");
+                        // res.send({message: "Wrong password"});
                     }
                 });
             } else {
                 console.log("Wrong username");
+                // res.send({message: "Wrong username"});
             }
         });
 });

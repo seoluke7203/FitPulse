@@ -4,7 +4,7 @@ import './loginform.css';
 // import MyVerticallyCenteredModal from "./Signup";
 import { Link } from "react-router-dom";
 // import MainPage from "./MainPage";
-import Register from "./Register";
+import Swal from "sweetalert2";
 
 // Admin
 // admin@admin.com
@@ -18,11 +18,30 @@ function LoginForm() {
     const [password, setPassword] = useState("");
     const handleSubmit = (e) => {
         // e.preventDefault();
-        console.log("Loging in...");
+        console.log("Logging in...");
+        
+        setTimeout(() => {
+            const loginFailed = true;
 
+            if (loginFailed){
+                showLoginStatus("Login Failed. Invalid email address or password");
+            } else{
+
+            }
+        }, 1000);
         // navigate('/');
-    }
+    };
 
+
+
+    function showLoginStatus(message){
+        Swal.fire({
+            icon: 'error',
+            title: 'Login Failed',
+            text: message,
+            confirmButtonText: 'OK'
+        });
+    }
 
 
 
