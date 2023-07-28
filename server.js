@@ -161,20 +161,43 @@ app.post("/saveNote", function (req, res) {
 });
 
 app.post('/register', function (req, res) {
-    bcrypt.hash(req.body.password, saltRounds, function (err, hash) {
-        // console.log(req.body.useremail);
-        const newUser = new User({
-            email: req.body.useremail,
-            password: hash,
-            fName: req.body.userfName,
-            lName: req.body.userlName,
-        });
+    
+    const email = req.body.useremail;
 
-        newUser.save();
-        console.log("New user saved!");
+    User.findOne({ email: email })
+    .then(function (existingUser) {
+        if (existingUser) {
+            console.log("Existing user!");
+            res.redirect(url.format({
+                pathname: "/register",
+                query: {
+                    message: "error1"
+                }
+                
+            }));
+        } else {
+            // If the email doesn't exist, proceed with user registration
+            bcrypt.hash(req.body.password, saltRounds, function (err, hash) {
+                const newUser = new User({
+                    email: email,
+                    password: hash,
+                    fName: req.body.userfName,
+                    lName: req.body.userlName,
+                });
 
-        res.redirect("/");
+                newUser.save();
+                console.log("New user saved!");
+        
+                // res.redirect("/");
+            });
+        }
+    })
+    .catch(function (err) {
+        console.error(err);
+        return res.status(500).send("Server error");
     });
+
+
 
 });
 
@@ -200,6 +223,7 @@ app.post('/', function (req, res, next) {
 
                     } else {
                         console.log("wrong password");
+                        
                         // res.send({message: "Wrong password"});
                     }
                 });

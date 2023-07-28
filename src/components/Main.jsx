@@ -52,7 +52,6 @@ function Main(props) {
         .then(response => {
           if (response.ok) {
             console.log('Note deleted successfully');
-            // Update your notes state or perform any necessary actions
           } else {
             console.error('Failed to delete note');
           }

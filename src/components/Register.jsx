@@ -4,7 +4,6 @@ import './bootstrap-social.css';
 import './register.css';
 import { GoogleLoginButton } from "react-social-login-buttons";
 import { useNavigate } from 'react-router-dom';
-import { useHistroy} from 'react-router-dom';
 import Swal from 'sweetalert2';
 
 // import MyVerticallyCenteredModal from "./Signup";
@@ -20,12 +19,31 @@ import { Link, redirect } from "react-router-dom";
 
 
 function Register() {
+  
+  const query = new URLSearchParams(window.location.search);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
-  const history = useHistroy();
+  const msg = query.get('message');
+
+  const errortype = msg?.text;
+
+  if (msg === "error1"){
+    Swal.fire({
+      icon: 'failed',
+      title: 'Failed!',
+      text: 'Duplicated User, please try registering with different email',
+      confirmButtonText: 'OK'
+    }).then((result) =>{
+      if (result.isConfirmed){
+        navigate('/register');
+      }
+    })
+  }
+
 
   const handleSubmit = (e) => {
+
     Swal.fire({
       icon: 'success',
       title: 'Registered!',
@@ -39,6 +57,8 @@ function Register() {
       }
     });
   }
+
+
 
 
   return (
